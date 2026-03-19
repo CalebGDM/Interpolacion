@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Interpolaciones</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">Calculadora de Interpolaciones</h2>
+
+        <!-- Selección -->
+        <label>Tipo de interpolación:</label>
+        <select class="form-select mb-3" id="tipoInterpolacion" onchange="generarCampos()">
+            <option disabled selected>Elegir opción</option>
+            <option value="lineal">Interpolación Lineal</option>
+            <option value="cuadratica">Interpolación Cuadrática</option>
+            <option value="lg_1">Lagrange (1er grado)</option>
+            <option value="lg_2">Lagrange (2do grado)</option>
+        </select>
+
+        <!-- Campos dinámicos -->
+        <div id="camposDatos"></div>
+
+        <!-- Valor a evaluar -->
+        <div class="mt-3">
+            <label>Valor a evaluar (x):</label>
+            <input type="number" class="form-control" id="x">
+        </div>
+
+        <!-- Botón calcular -->
+        <div class="d-grid mt-4">
+            <button class="btn btn-primary btn-lg" onclick="calcularInterpolacion()">Calcular / Obtener</button>
+        </div>
+
+        <!-- Resultado -->
+        <div class="alert alert-success mt-4" id="resultado">
+            Resultado: f(x) = ---
+        </div>
+
+        <!-- Botón error -->
+        <div class="d-grid mt-3">
+            <button class="btn btn-secondary" onclick="mostrarError()">Calcular error</button>
+        </div>
+
+        <!-- Sección de error oculta -->
+        <div id="seccionError" style="display: none;">
+
+            <div class="mt-3">
+                <label>Valor exacto:</label>
+                <input type="number" class="form-control" id="inputError">
+            </div>
+
+            <div class="alert alert-info mt-3" id="errorP">
+                Error porcentual: ---
+            </div>
+
+        </div>
+
+        <!-- Advertencia -->
+        <div class="alert alert-warning mt-4" id="advertencia" style="display: none;">
+            ⚠ Advertencia: Posible extrapolación (fuera del rango de datos)
+        </div>
+
+    </div>
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

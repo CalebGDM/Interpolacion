@@ -1,0 +1,19 @@
+body {
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+}
+
+.card {
+  border-radius: 15px;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+.alert {
+  border-radius: 10px;
+}
+
+.hiden {
+  display: none;
+}
