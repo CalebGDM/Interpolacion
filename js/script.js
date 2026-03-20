@@ -1,5 +1,3 @@
-// ─── Configuración de métodos ────────────────────────────────────────────────
-
 const INTERPOLACIONES = {
   lineal:     { entradas: 2, fn: interpolarLineal },
   cuadratica: { entradas: 3, fn: interpolarCuadratica },
@@ -7,16 +5,13 @@ const INTERPOLACIONES = {
   lg_2:       { entradas: 3, fn: lagrangeSegundo },
 };
 
-// ─── Estado ──────────────────────────────────────────────────────────────────
 
 let resultado = null;
 
-// ─── DOM helpers ─────────────────────────────────────────────────────────────
 
 const el  = (id) => document.getElementById(id);
 const num = (id) => el(id).valueAsNumber;
 
-// ─── Inicialización ───────────────────────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", () => {
   el("inputError").addEventListener("input", actualizarError);
@@ -25,11 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
     generarCampos();
     suscribirCamposPuntos();
   });
-  // No llamar generarCampos() aquí: al cargar, el select tiene
-  // "Elegir opción" (value=""), lo que causaría un crash.
 });
 
-// ─── UI ───────────────────────────────────────────────────────────────────────
 
 function generarCampos() {
   const tipo = el("tipoInterpolacion").value;
@@ -50,8 +42,7 @@ function generarCampos() {
   contenedor.innerHTML = "<h5>Ingrese los datos:</h5>" + filas;
 }
 
-// Suscribe actualizarAdvertencia a cada campo x0, x1... para que reaccione
-// cuando cambian los puntos, no solo cuando cambia x.
+
 function suscribirCamposPuntos() {
   const tipo = el("tipoInterpolacion").value;
   const cantidad = INTERPOLACIONES[tipo].entradas;
@@ -104,7 +95,6 @@ function actualizarAdvertencia() {
   advertencia.style.display = esExtrapolacion(xMin, xMax, x) ? "block" : "none";
 }
 
-// ─── Lógica de extrapolación ──────────────────────────────────────────────────
 
 function esExtrapolacion(a, b, x) {
   return x < a || x > b;
@@ -114,7 +104,6 @@ function verificarExtrapolacion(a, b, x) {
   el("advertencia").style.display = esExtrapolacion(a, b, x) ? "block" : "none";
 }
 
-// ─── Lectura de puntos desde el DOM ──────────────────────────────────────────
 
 function leerPuntos(cantidad) {
   return Array.from({ length: cantidad }, (_, i) => ({
@@ -122,8 +111,6 @@ function leerPuntos(cantidad) {
     f: num(`f${i}`),
   }));
 }
-
-// ─── Métodos de interpolación ─────────────────────────────────────────────────
 
 function interpolarLineal() {
   const [p0, p1] = leerPuntos(2);
